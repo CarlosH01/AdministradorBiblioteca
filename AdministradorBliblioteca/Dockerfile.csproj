@@ -5,20 +5,15 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-# Copiamos TODO el contenido del repositorio al build context
 COPY . .
 
-# Nos movemos a la carpeta donde está el proyecto
 WORKDIR /src/AdministradorBliblioteca
 
-# Restauramos y publicamos
 RUN dotnet restore
 RUN dotnet publish -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-
-# Copiamos la salida del build
 COPY --from=build /app/publish .
 
 ENTRYPOINT ["dotnet", "AdministradorBliblioteca.dll"]
