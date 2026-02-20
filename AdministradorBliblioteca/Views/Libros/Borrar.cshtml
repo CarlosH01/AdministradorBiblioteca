@@ -1,0 +1,51 @@
+﻿@model AdministradorBliblioteca.Models.Libro
+
+@{
+    ViewData["Title"] = "Eliminar Libro";
+}
+
+<h2 class="mt-4 mb-3 text-center text-danger">Eliminar</h2>
+<hr />
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="alert alert-warning shadow-sm">
+            <h5>Estas seguro de que deseas eliminar este libro?</h5>
+            <p class="mb-0">Esta accion no se puede deshacer</p>
+        </div>
+        <div class="card p-4 shadow-sm">
+            <dl class="row">
+                <dt class="col-sm-4">Titulo</dt>
+                <dd class="col-sm-8">@Model.Titulo</dd>
+
+                <dt class="col-sm-4">Autor</dt>
+                <dd class="col-sm-8">@Model.Autor</dd>
+
+                <dt class="col-sm-4">Año de publicacion</dt>
+                <dd class="col-sm-8">@Model.AnioPublicacion</dd>
+
+                <dt class="col-sm-4">Precio</dt>
+                <dd class="col-sm-8">@Model.Precio</dd>
+
+                <dt class="col-sm-4">Disponible</dt>
+                <dd class="col-sm-8">
+                    @if (Model.Disponible)
+                    {
+                        <span class="badge bg-success">Si</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-secondary">No</span>
+                    }
+
+                </dd>
+            </dl>
+            <form asp-action="Borrar" method="post" class="mt-4">
+                <input type="hidden" asp-for="Id" />
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-danger">Eliminar Libro</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
